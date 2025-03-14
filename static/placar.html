@@ -10,9 +10,7 @@
 <body>
     <div class="container mt-4">
         <h2>Placar em Tempo Real</h2>
-        <label for="update-interval">Intervalo de Atualização (ms):</label>
-        <input type="number" id="update-interval" value="5000" class="form-control w-25 mb-3">
-        <table class="table table-bordered table-striped table-hover">
+        <table class="table table-bordered">
             <thead>
                 <tr>
                     <th>Equipe</th>
@@ -32,27 +30,17 @@
     </div>
     
     <script>
-        let updateInterval = parseInt(document.getElementById("update-interval").value);
-        let intervalID;
-
         function atualizarPlacar() {
             $.getJSON("/api/placar", function(data) {
                 let placarBody = "";
                 data.forEach(function(item) {
-                    placarBody += `<tr><td>${item[0]}</td><td>${item[1]}</td></tr>`;
+                    placarBody += <tr><td>${item[0]}</td><td>${item[1]}</td></tr>;
                 });
                 $("#placar-body").html(placarBody);
             });
         }
         
-        function iniciarAtualizacao() {
-            clearInterval(intervalID);
-            updateInterval = parseInt(document.getElementById("update-interval").value);
-            intervalID = setInterval(atualizarPlacar, updateInterval);
-        }
-        
-        document.getElementById("update-interval").addEventListener("change", iniciarAtualizacao);
-        iniciarAtualizacao();
+        setInterval(atualizarPlacar, 5000);
     </script>
 </body>
 </html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Pontuação</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-4">
+        <h2>Registro de Pontuação</h2>
+        <form action="/add" method="POST" class="mb-4">
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="professor" class="form-label">Nome do Professor</label>
+                    <input type="text" class="form-control" name="professor" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="aluno" class="form-label">Nome do Aluno</label>
+                    <input type="text" class="form-control" name="aluno" required>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-md-4">
+                    <label for="data" class="form-label">Data</label>
+                    <input type="date" class="form-control" name="data" required>
+                </div>
+                <div class="col-md-4">
+                    <label for="turma" class="form-label">Turma</label>
+                    <input type="text" class="form-control" name="turma" required>
+                </div>
+                <div class="col-md-4">
+                    <label for="equipe" class="form-label">Equipe</label>
+                    <select class="form-control" name="equipe" required>
+                        <option value="Brasil">Brasil</option>
+                        <option value="Espanha">Espanha</option>
+                        <option value="Egito">Egito</option>
+                        <option value="China">China</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-md-8">
+                    <label for="motivo" class="form-label">Motivo</label>
+                    <input type="text" class="form-control" name="motivo" required>
+                </div>
+                <div class="col-md-4">
+                    <label for="pontos" class="form-label">Pontos</label>
+                    <input type="number" class="form-control" name="pontos" required>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary mt-3">Registrar</button>
+        </form>
+        
+        <h3>Registros</h3>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Professor</th>
+                    <th>Aluno</th>
+                    <th>Data</th>
+                    <th>Motivo</th>
+                    <th>Turma</th>
+                    <th>Equipe</th>
+                    <th>Pontos</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for score in scores %}
+                <tr>
+                    <td>{{ score.professor }}</td>
+                    <td>{{ score.aluno }}</td>
+                    <td>{{ score.data }}</td>
+                    <td>{{ score.motivo }}</td>
+                    <td>{{ score.turma }}</td>
+                    <td>{{ score.equipe }}</td>
+                    <td>{{ score.pontos }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="/placar" class="btn btn-success">Ver Placar</a>
+    </div>
+</body>
+</html>
